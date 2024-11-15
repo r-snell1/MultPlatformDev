@@ -1,9 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const TASKS_KEY = '@TASKS';
+
 const _storeData = async (items) => {
     try {
-        // Convert items array to JSON string before saving
-        await AsyncStorage.setItem('@TASKS', JSON.stringify(items));
+        await AsyncStorage.setItem(TASKS_KEY, JSON.stringify(items));
     } catch (error) {
         console.error('Error saving data', error);
     }
@@ -11,16 +12,20 @@ const _storeData = async (items) => {
 
 const _retrieveData = async () => {
     try {
-        const value = await AsyncStorage.getItem('@TASKS');
-        if (value !== null) {
-            // Parse JSON string back into an array
-            return JSON.parse(value);
-        }
-        return []; // Return an empty array if no data is found
+        const value = await AsyncStorage.getItem(TASKS_KEY);
+        return value ? JSON.parse(value) : [];
     } catch (error) {
         console.error('Error retrieving data', error);
-        return []; // Return an empty array in case of error
+        return [];
     }
 };
 
-export { _storeData, _retrieveData };
+const _clearData = async () => {
+    try {
+        await AsyncStorage.removeItem(TASKS_KEY);
+    } catch (error) {
+        console.error('Error clearing data', error);
+    }
+};
+
+export { _storeData, _retrieveData, _clearData };
