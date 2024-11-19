@@ -5,6 +5,7 @@ import {ActivityIndicator, Button, Text, TextInput, View} from "react-native";
 import styles from "./styles";
 import {Picker} from "@react-native-picker/picker";
 import stateNames from "./stateNames";
+import keys from "./keys";
 
 const WeatherApp = () => {
     const [city, setCity] = useState('');
@@ -12,7 +13,7 @@ const WeatherApp = () => {
     const [weather, setWeather] = useState(null);
     const [loading, setLoading] = useState(false);
     const [isCelsius, setIsCelsius] = useState(true);
-    const API_KEY = 'f47e851a84336835cb599f08fb2fa334';
+    const API_KEY = keys;
 
     // loads last city and state used
     useEffect(() => {
@@ -33,14 +34,14 @@ const WeatherApp = () => {
             alert('Please enter a city name');
             return;
         }
-        const location = `${cityName}${stateName ? ',' + stateName : ''}`; // Use both city and state (optional)
+        const location = `${cityName}${stateName ? ',' + stateName : ''}`;
         setLoading(true);
         try {
             const response = await axios.get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`
             );
             setWeather(response.data);
-            await _storeData({ city: cityName, state: stateName });  // Store both city and state
+            await _storeData({ city: cityName, state: stateName });
         } catch (error) {
             console.error(error);
             alert('City not found or network error!');
@@ -80,7 +81,7 @@ const WeatherApp = () => {
                     onChangeText={setCity}
                 />
 
-                {/* State Picker (Inside the same input field container) */}
+                {/*State Picker (Inside the same input field container)*/}
                 <Picker
                     selectedValue={state}
                     onValueChange={setState}
