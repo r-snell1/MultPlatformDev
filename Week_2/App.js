@@ -1,12 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import {FlatList, StyleSheet, Text, View, Button} from 'react-native';
+import {FlatList, Text, View, Button} from 'react-native';
 import React, {useRef} from "react";
 import styles from "./styles";
+import {DATA} from "./DATA";
+import {BEVERAGES} from "./BEVERAGES";
 
-const BEVERAGES = ["Coke", "Diet Coke", "Mellow Yellow", "Lemonade", "Root Beer", "Fanta",
-  "Sprite", "Dr. Pepper", "Unsweet Tea", "Sweet Tea", "Coffee", "Chocolate Milk", "Milk", "Juice", "Water", ""];
-
-const DATA = Array.from({ length: 15 }, (v, i) => `List item ${i}`);
 
 export default function App() {
   const myRef = useRef(null);

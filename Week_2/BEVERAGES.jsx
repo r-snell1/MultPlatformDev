@@ -1,0 +1,2 @@
+export const BEVERAGES = ["Coke", "Diet Coke", "Mellow Yellow", "Lemonade", "Root Beer", "Fanta",
+    "Sprite", "Dr. Pepper", "Unsweet Tea", "Sweet Tea", "Coffee", "Chocolate Milk", "Milk", "Juice", "Water", ""];
